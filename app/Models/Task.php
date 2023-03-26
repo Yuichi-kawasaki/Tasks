@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Application as LaravelApplication;
+use Illuminate\Foundation\Application;
 
 class Task extends Model
 {
@@ -30,15 +31,10 @@ class Task extends Model
             'status' => 'required',
         ];
     
-        if (isset($this->app) && $this->app->environment('testing')) {
-            $rules = [];
-        }
-    
         return $rules;
     }
     
     
-
     public function save(array $options = [])
     {
         $validator = Validator::make($this->attributes, $this->getValidationRules());
